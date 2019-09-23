@@ -1,0 +1,141 @@
+this file was created by Node.js
+Hello World!
+
+//Require the fs module to use file system
+const fs = require('fs');
+//Write to a file using path, data over write the old one
+fs.writeFileSync('notes.txt', 'this file was created by Node.js');
+//Write to the file append! adding more data
+fs.appendFileSync('notes.txt', '\nHello World!');
+//print console
+//simple log output
+// console.log('Completed!')
+
+//Note semicolon ; is optional !
+
+const name = 'Neo'
+
+//This will execute the file by using require
+//module export the name here
+//we assign fileName to get the exported data
+// const fileName = require('./utils')
+const num = require('./utils')
+
+//Export the function num aka add function
+// const result = num(3,2)
+
+//Using the adding function from utils by passing in data
+// console.log(result)
+
+//useful way to create a file lol
+// fs.writeFileSync('notes.js', '')
+
+const notes = require('./notes')
+
+const outPut = notes()
+
+//send the output from notes file
+// console.log(outPut)
+
+//npm package
+const validator = require('validator')
+//Notation change maybe ? default
+//To test if the email format are correct!
+// console.log(validator.default.isEmail('q807310185@yahoo.com'))
+// console.log(validator.default.isURL('http://baidu.com'))
+
+//npm chalk
+const color = require('chalk')
+const log = console.log
+//Test chalk package by setting color, bg and reverse previous 2
+// log(color.blue.bgRed.inverse ('Sucess'))
+
+//Printout the 3rd position of string
+// log(process.argv[2])
+
+// const command = process.argv[2]
+//
+// if(command === 'add'){
+//     console.log('Adding Note!')
+// }else if(command === 'remove') {
+//     console.log('Removing Notes!')
+// }
+
+const yargs = require('yargs')
+//customize yargs ver
+yargs.version('1.1.0')
+
+//add, remove, read, list
+yargs.command({
+    command:'add',
+    describe:'Add a new note',
+    //Use builder to configure the option
+    builder:{
+        //Set up property for options
+        title:{
+            describe: 'Note title',
+            //Force it to provide a title
+            demandOption: true,
+            type: 'string',
+        },
+
+        body:{
+            describe: 'body of the note',
+            demandOption: true,
+            type: 'String',
+        }
+    },
+    handler: function (argv) {
+        console.log('Title: ' + argv.title)
+        console.log('Body: '+ argv.body)
+    }
+})
+
+yargs.command({
+    command: 'remove',
+    describe: 'remove a note',
+    builder:{
+      title:{
+          describe: 'Note Title',
+          //This can force to require title
+          //Default is false : not required
+          demandOption: true,
+          //Always force string for title
+          type:'string'
+      }
+    },
+    handler: function (argv) {
+        console.log('removing a note', argv)
+    }
+})
+
+//Custome yargs command
+yargs.command({
+    command:'list',
+    describe:'list all the notes',
+    handler:function () {
+        console.log('List of notes')
+    }
+})
+
+yargs.command({
+    //THis is how to custom the command either just string to + / etc
+    command: '+read',
+    describe:'read a notes',
+    handler: function () {
+        console.log('reading a notes')
+    }
+})
+
+// console.log(yargs.argv)
+yargs.parse()
+
+
+
+
+
+
+
+
+
+
