@@ -1,0 +1,13 @@
+//Asynchronous Basics - non blocking
+console.log('Staring')
+
+//2000miSec = 2sec
+setTimeout(()=>{
+    console.log('2 sec timer')
+}, 2000)
+
+setTimeout(()=>{
+    console.log('0 sec timer')
+}, 0)
+
+console.log('stopping')
